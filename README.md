@@ -10,22 +10,33 @@
 
 Move the cursor by looking around. Blink your left eye to left-click, blink your right eye to right-click.
 
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python_3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![MediaPipe](https://img.shields.io/badge/MediaPipe-0097A7?style=for-the-badge&logo=google&logoColor=white)](https://mediapipe.dev/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
 [![PyAutoGUI](https://img.shields.io/badge/PyAutoGUI-FFD43B?style=for-the-badge&logo=python&logoColor=black)](https://pyautogui.readthedocs.io/)
+[![License](https://img.shields.io/github/license/Davide-Bonn/MouseEye?style=for-the-badge)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/Davide-Bonn/MouseEye?style=for-the-badge&color=yellow)](https://github.com/Davide-Bonn/MouseEye/stargazers)
 
 ---
 
 </div>
 
+## Overview
+
+MouseEye uses MediaPipe's **Face Mesh** with the 478-point model (including refined iris landmarks) to track your eye movements in real time. Your iris position controls the cursor, and blinks trigger mouse clicks.
+
+---
+
 ## How It Works
 
-MouseEye uses MediaPipe's **Face Mesh** with the 478-point model (including refined iris landmarks) to track your eye movements in real time.
-
 ```
-Webcam → Face Mesh (478 landmarks) → Iris Position → Cursor Movement
-                                    → Eye Aspect Ratio → Blink → Click
+┌────────┐    ┌───────────┐    ┌──────────────┐    ┌────────────────┐
+│ Webcam │ ─► │ Face Mesh │ ─► │ Iris Center  │ ─► │ Cursor moveTo  │
+│ Frame  │    │ 478 pts   │    │ landmarks    │    │ (pyautogui)    │
+└────────┘    └───────────┘    ├──────────────┤    ├────────────────┤
+                               │ Eye Aspect   │ ─► │ click() or     │
+                               │ Ratio (EAR)  │    │ click(right)   │
+                               └──────────────┘    └────────────────┘
 ```
 
 | Step | Detail |
@@ -51,7 +62,7 @@ Webcam → Face Mesh (478 landmarks) → Iris Position → Cursor Movement
 ```bash
 git clone https://github.com/Davide-Bonn/MouseEye.git
 cd MouseEye
-pip install mediapipe opencv-contrib-python pyautogui numpy
+pip install -r requirements.txt
 ```
 
 ### 2. Run
@@ -114,6 +125,20 @@ Right Iris: 468-472              Left Iris: 473-477
 
 ---
 
+## Project Structure
+
+```
+MouseEye/
+├── mouse_eye.py         # Main script — iris tracking + blink detection
+├── logo.svg             # Project logo (512x512)
+├── icon.svg             # App icon (128x128)
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
+
+---
+
 ## Troubleshooting
 
 | Issue | Fix |
@@ -136,4 +161,4 @@ Right Iris: 468-472              Left Iris: 473-477
 
 ## License
 
-Personal project for learning computer vision with MediaPipe.
+[MIT License](LICENSE) — see LICENSE for details.
