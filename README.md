@@ -25,6 +25,12 @@ Move the cursor by looking around. Blink your left eye to left-click, blink your
 
 MouseEye uses MediaPipe's **Face Mesh** with the 478-point model (including refined iris landmarks) to track your eye movements in real time. Your iris position controls the cursor, and blinks trigger mouse clicks.
 
+<div align="center">
+<img src="assets/mouseeye.png" alt="MouseEye Preview" width="600" />
+
+<sub>Preview window — cyan dots track iris position, magenta dots measure eye openness, EAR values shown at bottom.</sub>
+</div>
+
 ---
 
 ## How It Works
@@ -129,6 +135,8 @@ Right Iris: 468-472              Left Iris: 473-477
 
 ```
 MouseEye/
+├── assets/
+│   └── mouseeye.png     # Preview window screenshot
 ├── mouse_eye.py         # Main script — iris tracking + blink detection
 ├── logo.svg             # Project logo (512x512)
 ├── icon.svg             # App icon (128x128)
